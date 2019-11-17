@@ -62,4 +62,26 @@ router.get("/edit/:id",(req,res)=>
     .catch(err=>console.log(`Error:${err}`));
 });
 
+router.put("/edit/:id",(req,res)=>
+{
+    Task.findById(req.params.id)
+    .then((task)=>
+    {
+        task.title=req.body.title;
+        task.price=req.body.price;
+        task.quantity=req.body.quantity;
+        task.description=req.body.description;
+        
+        task.save()
+        .then(()=>
+        {
+            res.redirect("/task/list");
+        })
+        .catch(err=>console.log(`Error: ${err}`));
+    })
+    .catch(err=>console.log(`Error:${err}`));
+});
+
+module.exports=router;
+
 

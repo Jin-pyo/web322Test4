@@ -45,7 +45,7 @@ mongoose.connect(MONGO_DB_URL, {useNewUrlParser: true,useUnifiedTopology: true }
 })
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log(`Your Web Server has been connected`);
     
