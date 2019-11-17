@@ -36,7 +36,7 @@ router.post("/add",(req,res)=>
         product.save()
         .then(()=>{
             console.log(`Data was added in the database`);
-            res.redirect("/product/list");
+            res.redirect("/product/add");
         })
         .catch(err=>console.log(`Error:${err}`));
     }
