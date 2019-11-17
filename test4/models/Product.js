@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 const Schema=mongoose.Schema;
 
-const taskSchema=new Schema({
+const productSchema=new Schema({
     title:  
     {
       type:String,
@@ -24,6 +24,6 @@ const taskSchema=new Schema({
     }
 });
 
-const taskModel=mongoose.model("Task",taskSchema);
+const productModel=mongoose.model("Product",productSchema);
 
-module.exports=taskModel;
+module.exports=productModel;

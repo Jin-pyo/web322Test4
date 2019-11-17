@@ -1,0 +1,20 @@
+ <h2>Edit Product</h2>
+    <form method="POST" action="/product/edit/{{productDocument._id}}/?_method=PUT">
+
+        <label>Title</label>
+        <input type="text" name="title" id="title" value="{{productDocument.title}}"> <br><br>
+
+       <label>Product Price</label>
+        <input type="text" name="price" id="price" value="{{productDocument.price}}"> <br><br>
+
+        <label>Quantity on Hand</label>
+        <input type="text" name="quantity" id="quantity" value="{{productDocument.quantity}}"> <br><br>
+
+        <label>Product Description</label>
+        <textarea id="description" name="description">{{productDocument.description}}</textarea><br><br>
+
+        <input type="radio" name="tax" id="yes" value="yes" checked> Yes<br>
+        <input type="radio" name="tax" id="no" value="no"> No<br>
+
+        <input type="submit" value="Update product">
+    </form>

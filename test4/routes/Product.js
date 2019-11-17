@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router();
-const Task = require("../models/Task");
+const Product = require("../models/Product");
 
 router.get("/add",(req,res)=>
 {
-    res.render("Task/taskAddForm")
+    res.render("Product/productAddForm")
 });
 
 router.post("/add",(req,res)=>
@@ -25,18 +25,18 @@ router.post("/add",(req,res)=>
 
     if(error.length>0)
     {
-        res.render("Task/taskAddForm",{
+        res.render("Product/productAddForm",{
             messages:error
         });
     }
 
     else
     {
-        const task=new Task(newProduct)
-        task.save()
+        const product=new Product(newProduct)
+        product.save()
         .then(()=>{
             console.log(`Data was added in the database`);
-            res.redirect("/task/list");
+            res.redirect("/product/list");
         })
         .catch(err=>console.log(`Error:${err}`));
     }
@@ -44,9 +44,9 @@ router.post("/add",(req,res)=>
 
 router.get("/list",(req,res)=>
 {
-    Task.find()
-    .then((tasks)=>{
-        res.render("Task/taskdashboard",{lists:tasks});
+    Product.find()
+    .then((products)=>{
+        res.render("Product/productdashboard",{lists:products});
     })
     .catch(err=>console.log(`Error:${err}`));
 });
@@ -54,28 +54,28 @@ router.get("/list",(req,res)=>
 
 router.get("/edit/:id",(req,res)=>
 {
-    Task.findById(req.params.id)
-    .then((task)=>
+    Product.findById(req.params.id)
+    .then((products)=>
     {
-        res.render("Task/taskEditForm",{taskDocument:task})
+        res.render("Product/productEditForm",{productDocument:products})
     })
     .catch(err=>console.log(`Error:${err}`));
 });
 
 router.put("/edit/:id",(req,res)=>
 {
-    Task.findById(req.params.id)
-    .then((task)=>
+    Product.findById(req.params.id)
+    .then((product)=>
     {
-        task.title=req.body.title;
-        task.price=req.body.price;
-        task.quantity=req.body.quantity;
-        task.description=req.body.description;
+        product.title=req.body.title;
+        product.price=req.body.price;
+        product.quantity=req.body.quantity;
+        product.description=req.body.description;
         
-        task.save()
+        product.save()
         .then(()=>
         {
-            res.redirect("/task/list");
+            res.redirect("/product/list");
         })
         .catch(err=>console.log(`Error: ${err}`));
     })

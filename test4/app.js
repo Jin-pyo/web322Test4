@@ -7,7 +7,7 @@ const methodOverride=require('method-override');
 require("dotenv").config({path:'./config/keys.env'});
 
 //import your router objects
-const taskRoutes=require("./routes/Task");
+const productRoutes=require("./routes/Product");
 const generalRoutes=require("./routes/General");
 
 //creation of app object
@@ -23,7 +23,7 @@ app.use(methodOverride('_method'));
 app.use(express.static("public"));
 
 app.use("/",generalRoutes);
-app.use("/task",taskRoutes);
+app.use("/product",productRoutes);
 
 app.use("/",(req,res)=>
 {
