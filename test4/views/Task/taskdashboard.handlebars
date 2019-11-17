@@ -1,0 +1,16 @@
+<h2>Product Listing</h2>
+
+    <section class="tasks-contatiner">
+        {{#each lists}}
+        <div>
+            {{this.title}}
+            &nbsp;&nbsp;
+            <a href="/task/edit/{{this._id}}">Edit</a>&nbsp;&nbsp;
+
+        </div>
+
+        {{else}}
+            No tasks in database
+        {{/each}}
+
+    </section>

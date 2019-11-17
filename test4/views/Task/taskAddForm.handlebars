@@ -1,0 +1,27 @@
+ <h2>Add Product</h2>
+    {{#each messages}}
+        <div class="error">
+            {{this}}
+        </div>
+
+    {{/each}}
+    <form method="POST" action="/task/add">
+
+        <label>Product Title</label>
+        <input type="text" name="title" id="title"> <br><br>
+
+        <label>Product Price</label>
+        <input type="text" name="price" id="price"> <br><br>
+
+        <label>Quantity on Hand</label>
+        <input type="text" name="quantity" id="quantity"> <br><br>
+
+        <label>Product Description</label>
+        <textarea id="description" name="description"></textarea><br><br>
+
+        <input type="radio" name="tax" value="yes" checked> Yes<br>
+        <input type="radio" name="tax" value="no"> No<br>
+
+        <input type="submit" value="Add Product">
+
+    </form>
