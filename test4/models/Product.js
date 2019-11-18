@@ -17,11 +17,13 @@ const productSchema=new Schema({
     description:
     {
         type:String
-    },
+    }
+    /*,
     tax:
     {
         type:Boolean
     } 
+    */
 });
 
 const productModel=mongoose.model("Product",productSchema);

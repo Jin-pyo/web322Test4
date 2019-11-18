@@ -15,7 +15,7 @@ router.post("/add",(req,res)=>
         price:req.body.price,
         quantity:req.body.quantity,
         description:req.body.description,
-        tax:req.body.tax
+        //tax:req.body.tax
     }
 
     const error=[];
@@ -23,7 +23,7 @@ router.post("/add",(req,res)=>
     if(newProduct.price.trim()==""){error.push("Sorry,write the price");}
     if(newProduct.quantity.trim()==""){error.push("Sorry,write the quantity");}
     if(newProduct.description.trim()==""){error.push("Sorry,write descrption");}
-    if(newProduct.tax==""){error.push("sorry, click tax");}
+    //if(newProduct.tax==""){error.push("sorry, click tax");}
     
     if(error.length>0)
     {
@@ -36,7 +36,6 @@ router.post("/add",(req,res)=>
         const error1=[];
         const check=req.body.title
         
-
         Product.findOne({title:check})
         .then(ch=>{
 
@@ -50,23 +49,13 @@ router.post("/add",(req,res)=>
                 })
                 .catch(err=>console.log(`Error:${err}`));
             }
-
-            else{
-                
-                error1.push("Same title");
-                
-                if(error1.length>0)
-                {
-                    res.render("Product/productAddForm",{
-                    messages:error1
-                    });
-                }
+            else
+            {
+                error1.push("Same title exist");
+                res.render("Product/productAddForm",{messages:error1});
             }
-
         })
         .catch(err=>console.log(`Error:${err}`));
-
-        
     }
 });
 
@@ -93,8 +82,6 @@ router.get("/edit/:id",(req,res)=>
 
 router.put("/edit/:id",(req,res)=>
 {
-    
-
     Product.findById(req.params.id)
     .then((product)=>
     {
@@ -104,7 +91,7 @@ router.put("/edit/:id",(req,res)=>
         if(req.body.price==""){error.push("Sorry,write the price");}
         if(req.body.quantity==""){error.push("Sorry,write the quantity");}
         if(req.body.description==""){error.push("Sorry,write descrption");}
-        if(req.body.tax==""){error.push("sorry, click tax");}
+        //if(req.body.tax==""){error.push("sorry, click tax");}
         
         if(error.length>0)
         {
@@ -142,23 +129,15 @@ router.put("/edit/:id",(req,res)=>
                 {
                     error1.push("Same Title exist");
 
-                    if(error1.length>0)
+                    Product.findById(req.params.id)
+                    .then((products)=>
                     {
-                        Product.findById(req.params.id)
-                        .then((products)=>
-                        {
-                            res.render("Product/productEditForm",{productDocument:products,messages:error1})
-                        })
-                        .catch(err=>console.log(`Error:${err}`));
-                    }
+                        res.render("Product/productEditForm",{productDocument:products,messages:error1})
+                    })
+                    .catch(err=>console.log(`Error:${err}`)); 
                 }
-
             })
-
-
-            
         }
-        
     })
     .catch(err=>console.log(`Error:${err}`));
 });
