@@ -15,15 +15,15 @@ router.post("/add",(req,res)=>
         price:req.body.price,
         quantity:req.body.quantity,
         description:req.body.description,
-        //tax:req.body.tax
+        tax:req.body.tax
     }
-
+    console.log(`${newProduct.tax}`);
     const error=[];
     if(newProduct.title.trim()==""){error.push("Sorry,write the title");}
     if(newProduct.price.trim()==""){error.push("Sorry,write the price");}
     if(newProduct.quantity.trim()==""){error.push("Sorry,write the quantity");}
     if(newProduct.description.trim()==""){error.push("Sorry,write descrption");}
-    //if(newProduct.tax==""){error.push("sorry, click tax");}
+    if(newProduct.tax==undefined){error.push("sorry, click tax");}
     
     if(error.length>0)
     {
@@ -55,7 +55,7 @@ router.post("/add",(req,res)=>
                 res.render("Product/productAddForm",{messages:error1});
             }
         })
-        .catch(err=>console.log(`Error:${err}`));
+        .catch(err=>console.log(`Error11:${err}`));
     }
 });
 
@@ -74,8 +74,21 @@ router.get("/edit/:id",(req,res)=>
     Product.findById(req.params.id)
     .then((products)=>
     {   
-        //console.log(`****This ${products.title}`);
-        res.render("Product/productEditForm",{productDocument:products})
+        console.log(`****This ${products.tax}`);
+        if(products.tax==true)
+        {
+            const oo=true;
+            console.log(`${oo}`);
+            res.render("Product/productEditForm",{productDocument:products,ttrue:oo})
+        }
+        else
+        {
+            const ff=true;
+            console.log(`${ff}`);
+            res.render("Product/productEditForm",{productDocument:products,ffalse:ff})
+        }
+
+        
     })
     .catch(err=>console.log(`Error:${err}`));
 });
@@ -91,7 +104,7 @@ router.put("/edit/:id",(req,res)=>
         if(req.body.price==""){error.push("Sorry,write the price");}
         if(req.body.quantity==""){error.push("Sorry,write the quantity");}
         if(req.body.description==""){error.push("Sorry,write descrption");}
-        //if(req.body.tax==""){error.push("sorry, click tax");}
+        if(req.body.tax==undefined){error.push("sorry, click tax");}
         
         if(error.length>0)
         {
@@ -116,7 +129,7 @@ router.put("/edit/:id",(req,res)=>
                     product.price=req.body.price;
                     product.quantity=req.body.quantity;
                     product.description=req.body.description;
-                    //product.tax=req.body.tax;
+                    product.tax=req.body.tax;
 
                     product.save()
                     .then(()=>
