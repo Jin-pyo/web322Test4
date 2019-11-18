@@ -77,15 +77,15 @@ router.get("/edit/:id",(req,res)=>
         console.log(`****This ${products.tax}`);
         if(products.tax==true)
         {
-            const oo=true;
-            console.log(`${oo}`);
-            res.render("Product/productEditForm",{productDocument:products,ttrue:oo})
+            const checked="checked"
+            console.log(`YY`);
+            res.render("Product/productEditForm",{productDocument:products,ttrue:checked})
         }
         else
         {
-            const ff=true;
-            console.log(`${ff}`);
-            res.render("Product/productEditForm",{productDocument:products,ffalse:ff})
+            const checked1="checked"
+            console.log(`NN`);
+            res.render("Product/productEditForm",{productDocument:products,ffalse:checked1})
         }
 
         
@@ -131,6 +131,7 @@ router.put("/edit/:id",(req,res)=>
                     product.description=req.body.description;
                     product.tax=req.body.tax;
 
+                    console.log(`This is tax after fix ${product.tax}`);
                     product.save()
                     .then(()=>
                     {
