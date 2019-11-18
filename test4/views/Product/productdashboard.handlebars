@@ -1,16 +1,20 @@
-<h2>Product Listing</h2>
+<div class="block">
+    <h2>Product Listing</h2>
 
-    <section class="products-contatiner">
-        {{#each lists}}
-        <div>
-            {{this.title}}
-            &nbsp;&nbsp;
-            <a href="/product/edit/{{this._id}}">Edit</a>&nbsp;&nbsp;
+        <div class="grid-container ">
+            {{#each lists}}
+                <div>
+                    {{this.title}}
+                </div>
+
+                <div>
+                    <a href="/product/edit/{{this._id}}">Edit</a>
+                </div>
+
+            {{else}}
+                No tasks in database
+            {{/each}}
 
         </div>
 
-        {{else}}
-            No tasks in database
-        {{/each}}
-
-    </section>
+</div>

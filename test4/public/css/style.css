@@ -5,3 +5,37 @@
     background-color: pink;
     border :1px solid red;
 }
+
+h2{
+    font-weight:bold;
+    font-size:x-large;
+}
+
+.grid-container 
+  {
+      display: grid;
+      grid-template-columns: auto auto;
+      padding: 10px;
+      grid-gap:10px;
+  }
+
+  .block{
+      width:500px;
+      border:thin solid black;
+      border-radius: 10px;
+      padding:20px;
+  }
+
+  .header-block{
+      padding:20px;
+      border-radius: 10px;
+      border:thin solid black;
+    margin-bottom:20px;
+      width:500px;
+  }
+
+  .grid input,textarea{
+    border: thin solid black;
+    border-radius: 5px;
+    padding:5px;
+  }

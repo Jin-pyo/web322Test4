@@ -1,3 +1,5 @@
+ 
+ <div class="block">
  <h2>Add Product</h2>
     {{#each messages}}
         <div class="error">
@@ -5,23 +7,56 @@
         </div>
 
     {{/each}}
+
+
+    
     <form method="POST" action="/product/add">
+    <div class="grid-container">
+        <div class="grid">
+            <label>Product Title</label>
+        </div>
+        
+        <div class="grid">
+            <input type="text" name="title" id="title"> 
+        </div>
 
-        <label>Product Title</label>
-        <input type="text" name="title" id="title"> <br><br>
+        <div class="grid">
+            <label>Product Price</label>
+        </div>
 
-        <label>Product Price</label>
-        <input type="text" name="price" id="price"> <br><br>
+        <div class="grid">
+            <input type="text" name="price" id="price">
+        </div>
 
-        <label>Quantity on Hand</label>
-        <input type="text" name="quantity" id="quantity"> <br><br>
+        <div class="grid">
+            <label>Quantity on Hand</label>
+        </div>
+        
+        
+        <div class="grid">
+            <input type="text" name="quantity" id="quantity">
+        </div>
+        
+        <div class="grid">
+            <label>Product Description</label>
+        </div>
+        
+        
+        <div class="grid">
+             <textarea id="description" name="description"></textarea>
+        </div>
 
-        <label>Product Description</label>
-        <textarea id="description" name="description"></textarea><br><br>
-
-        <input type="radio" name="tax" value="yes" checked> Yes<br>
-        <input type="radio" name="tax" value="no"> No<br>
+        <div class="grid"><label>Taxable</label></div>
+        
+        <div class="grid">
+            <input type="radio" name="tax" value="yes" checked> Yes<br>
+            <input type="radio" name="tax" value="no"> No<br>
+        </div>
+        
+    </div>
 
         <input type="submit" value="Add Product">
-
+    
     </form>
+   
+ </div>

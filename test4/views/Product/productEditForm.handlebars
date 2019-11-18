@@ -1,20 +1,60 @@
- <h2>Edit Product</h2>
+ <div class="block">
+  <h2>Edit Product</h2>
+    {{#each messages}}
+        <div class="error">
+            {{this}}
+        </div>
+
+    {{/each}}
+
     <form method="POST" action="/product/edit/{{productDocument._id}}/?_method=PUT">
+        <div class="grid-container">
+            <div class="grid">
+                <label>Product Title</label>
+            </div>
+            
+            <div class="grid">
+                <input type="text" name="title" id="title" value="{{productDocument.title}}">
+            </div>
 
-        <label>Title</label>
-        <input type="text" name="title" id="title" value="{{productDocument.title}}"> <br><br>
+            <div class="grid">
+                <label>Product Price</label>
+            </div>
 
-       <label>Product Price</label>
-        <input type="text" name="price" id="price" value="{{productDocument.price}}"> <br><br>
+            <div class="grid">
+            <input type="text" name="price" id="price" value="{{productDocument.price}}">
+            </div>
 
-        <label>Quantity on Hand</label>
-        <input type="text" name="quantity" id="quantity" value="{{productDocument.quantity}}"> <br><br>
+            <div class="grid">
+                <label>Quantity on Hand</label>
+            </div>
+            
+            
+            <div class="grid">
+                <input type="text" name="quantity" id="quantity" value="{{productDocument.quantity}}">
+            </div>
+            
+            <div class="grid">
+                <label>Product Description</label>
+            </div>
+            
+            
+            <div class="grid">
+                <textarea id="description" name="description">{{productDocument.description}}</textarea>
+            </div>
 
-        <label>Product Description</label>
-        <textarea id="description" name="description">{{productDocument.description}}</textarea><br><br>
-
-        <input type="radio" name="tax" id="yes" value="yes" checked> Yes<br>
-        <input type="radio" name="tax" id="no" value="no"> No<br>
+            <div class="grid"><label>Taxable</label></div>
+            
+            <div class="grid">
+                <input type="radio" name="tax" value="yes" checked> Yes<br>
+                <input type="radio" name="tax" value="no"> No<br>
+            </div>
+            
+        </div>
 
         <input type="submit" value="Update product">
+    
     </form>
+   
+</div>
+ 
