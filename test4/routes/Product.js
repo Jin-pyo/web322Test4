@@ -83,9 +83,9 @@ router.get("/edit/:id",(req,res)=>
         }
         else
         {
-            const checked1="checked"
+            const checked="checked"
             console.log(`NN`);
-            res.render("Product/productEditForm",{productDocument:products,ffalse:checked1})
+            res.render("Product/productEditForm",{productDocument:products,ffalse:checked})
         }
 
         
@@ -111,7 +111,16 @@ router.put("/edit/:id",(req,res)=>
             Product.findById(req.params.id)
             .then((products)=>
             {
-                res.render("Product/productEditForm",{productDocument:products,messages:error})
+                if(products.tax==true)
+                {
+                    const checked="checked"
+                    res.render("Product/productEditForm",{productDocument:products,messages:error,ttrue:checked})
+                }
+                else
+                {
+                    const checked="checked"
+                    res.render("Product/productEditForm",{productDocument:products,messages:error,ffalse:checked})
+                }
             })
             .catch(err=>console.log(`Error:${err}`));
         }
@@ -146,7 +155,16 @@ router.put("/edit/:id",(req,res)=>
                     Product.findById(req.params.id)
                     .then((products)=>
                     {
-                        res.render("Product/productEditForm",{productDocument:products,messages:error1})
+                        if(products.tax==true)
+                        {
+                            const checked="checked"
+                            res.render("Product/productEditForm",{productDocument:products,messages:error1,ttrue:checked})
+                        }
+                        else
+                        {
+                            const checked="checked"
+                             res.render("Product/productEditForm",{productDocument:products,messages:error1,ffalse:checked})
+                        }
                     })
                     .catch(err=>console.log(`Error:${err}`)); 
                 }
