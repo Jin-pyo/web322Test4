@@ -84,7 +84,8 @@ router.get("/edit/:id",(req,res)=>
 {
     Product.findById(req.params.id)
     .then((products)=>
-    {
+    {   
+        //console.log(`****This ${products.title}`);
         res.render("Product/productEditForm",{productDocument:products})
     })
     .catch(err=>console.log(`Error:${err}`));
@@ -92,21 +93,71 @@ router.get("/edit/:id",(req,res)=>
 
 router.put("/edit/:id",(req,res)=>
 {
+    
+
     Product.findById(req.params.id)
     .then((product)=>
     {
-        product.title=req.body.title;
-        product.price=req.body.price;
-        product.quantity=req.body.quantity;
-        product.description=req.body.description;
-        
+        const error=[];
 
-        product.save()
-        .then(()=>
+        if(req.body.title==""){error.push("Sorry,write the title");}
+        if(req.body.price==""){error.push("Sorry,write the price");}
+        if(req.body.quantity==""){error.push("Sorry,write the quantity");}
+        if(req.body.description==""){error.push("Sorry,write descrption");}
+        if(req.body.tax==""){error.push("sorry, click tax");}
+        
+        if(error.length>0)
         {
-            res.redirect("/product/list");
-        })
-        .catch(err=>console.log(`Error: ${err}`));
+            Product.findById(req.params.id)
+            .then((products)=>
+            {
+                res.render("Product/productEditForm",{productDocument:products,messages:error})
+            })
+            .catch(err=>console.log(`Error:${err}`));
+        }
+        else
+        {
+            const error1=[];
+            const check=req.body.title;
+
+            Product.findOne({title:check})
+            .then(ch=>{
+
+                if(ch==null || check==product.title)
+                {
+                    product.title=req.body.title;
+                    product.price=req.body.price;
+                    product.quantity=req.body.quantity;
+                    product.description=req.body.description;
+                    //product.tax=req.body.tax;
+
+                    product.save()
+                    .then(()=>
+                    {
+                        res.redirect("/product/list");
+                    })
+                    .catch(err=>console.log(`Error: ${err}`));
+                }
+                else
+                {
+                    error1.push("Same Title exist");
+
+                    if(error1.length>0)
+                    {
+                        Product.findById(req.params.id)
+                        .then((products)=>
+                        {
+                            res.render("Product/productEditForm",{productDocument:products,messages:error1})
+                        })
+                        .catch(err=>console.log(`Error:${err}`));
+                    }
+                }
+
+            })
+
+
+            
+        }
         
     })
     .catch(err=>console.log(`Error:${err}`));
