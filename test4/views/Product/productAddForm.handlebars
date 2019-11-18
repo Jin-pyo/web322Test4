@@ -5,11 +5,8 @@
         <div class="error">
             {{this}}
         </div>
-
     {{/each}}
 
-
-    
     <form method="POST" action="/product/add">
     <div class="grid-container">
         <div class="grid">
@@ -49,14 +46,12 @@
         <div class="grid"><label>Taxable</label></div>
         
         <div class="grid">
-            <input type="radio" name="tax" value="yes" checked> Yes<br>
-            <input type="radio" name="tax" value="no"> No<br>
+            <input type="radio" name="yy" id="yy" value="yes"> Yes<br>
+            <!--<input type="radio" name="tax" id="nn" value="no"> No<br> -->
         </div>
         
     </div>
-
         <input type="submit" value="Add Product">
-    
     </form>
    
  </div>

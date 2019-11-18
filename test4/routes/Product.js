@@ -14,7 +14,8 @@ router.post("/add",(req,res)=>
         title:req.body.title,
         price:req.body.price,
         quantity:req.body.quantity,
-        description:req.body.description
+        description:req.body.description,
+        tax:req.body.tax
     }
 
     const error=[];
@@ -22,23 +23,50 @@ router.post("/add",(req,res)=>
     if(newProduct.price.trim()==""){error.push("Sorry,write the price");}
     if(newProduct.quantity.trim()==""){error.push("Sorry,write the quantity");}
     if(newProduct.description.trim()==""){error.push("Sorry,write descrption");}
-
+    if(newProduct.tax==""){error.push("sorry, click tax");}
+    
     if(error.length>0)
     {
         res.render("Product/productAddForm",{
             messages:error
         });
     }
-
     else
     {
-        const product=new Product(newProduct)
-        product.save()
-        .then(()=>{
-            console.log(`Data was added in the database`);
-            res.redirect("/product/add");
+        const error1=[];
+        const check=req.body.title
+        
+
+        Product.findOne({title:check})
+        .then(ch=>{
+
+            if(ch==null)
+            {
+                const product=new Product(newProduct)
+                product.save()
+                .then(()=>{
+                    console.log(`Data was added in the database`);
+                    res.redirect("/product/list");
+                })
+                .catch(err=>console.log(`Error:${err}`));
+            }
+
+            else{
+                
+                error1.push("Same title");
+                
+                if(error1.length>0)
+                {
+                    res.render("Product/productAddForm",{
+                    messages:error1
+                    });
+                }
+            }
+
         })
         .catch(err=>console.log(`Error:${err}`));
+
+        
     }
 });
 
@@ -72,12 +100,14 @@ router.put("/edit/:id",(req,res)=>
         product.quantity=req.body.quantity;
         product.description=req.body.description;
         
+
         product.save()
         .then(()=>
         {
             res.redirect("/product/list");
         })
         .catch(err=>console.log(`Error: ${err}`));
+        
     })
     .catch(err=>console.log(`Error:${err}`));
 });

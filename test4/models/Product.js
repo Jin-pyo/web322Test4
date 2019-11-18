@@ -4,24 +4,24 @@ const Schema=mongoose.Schema;
 const productSchema=new Schema({
     title:  
     {
-      type:String,
-      required:true
+      type:String
     },
     price:
     {
-        type:Number,
-        required:true
+        type:Number
     },
     quantity:
     {
-        type:Number,
-        required:true
+        type:Number
     },
     description:
     {
-        type:String,
-        required:true
-    }
+        type:String
+    },
+    tax:
+    {
+        type:Boolean
+    } 
 });
 
 const productModel=mongoose.model("Product",productSchema);
